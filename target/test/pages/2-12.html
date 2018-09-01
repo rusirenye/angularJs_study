@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../common/angular-1.7.3/angular.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        div {
+            margin: 8px 0px;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myController">
+    <div ng-show={{isShow}}>duguoping</div>
+    <div ng-hide={{isHide}}>duguoping@abchina.com</div>
+    <ul ng-switch on={{switch}}>
+        <li ng-switch-when="1">information 1</li>
+        <li ng-switch-when="2">information 2</li>
+        <li ng-switch-default>more information</li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    angular.module('myApp', []).controller('myController', function ($scope) {
+        $scope.isShow = true;
+        $scope.isHide = false;
+        // $scope.switch = 1;
+    });
+</script>
+</html>
