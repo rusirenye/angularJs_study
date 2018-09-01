@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../common/angular-1.7.3/angular.js"></script>
+</head>
+<body>
+<form ng-app="myApp" ng-controller="myController" name="temp_form">
+    <div>
+        <input name="t_name" type='text' ng-model="name" required/>
+        <span ng-show="temp_form.t_name.$error.required">名字不容许为空</span>
+    </div>
+
+    <div>
+        <input name="t_email" type='text' ng-model='email' required/>
+        <span ng-show="temp_form.t_email.$error.required">邮件不允许为空</span>
+        <span ng-show="temp_form.t_email.$error.email">邮件格式不正确</span>
+    </div>
+
+    <input type="submit" ng-disabled="temp_form.$invalid" value='提交'/>
+</form>
+</body>
+<script type="text/javascript">
+    angular.module('myApp', []).controller('myController', function ($scope) {
+        $scope.name = 'duguoping';
+        $scope.email = 'duguoping@abchina.com';
+        $scope.save = function () {
+            console.log('submit success');
+        }
+    });
+</script>
+</html>
