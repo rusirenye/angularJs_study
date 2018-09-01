@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../common/angular-1.7.3/angular.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        div {
+            margin: 8px 0px;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<form name="temp_form">
+    <div>
+        学制:
+        <select ng-model="selectA" ng-options="v.id as v.text for v in aData"
+                ng-change="aChange(selectA)">
+            <option value="">--请选择--</option>
+        </select>
+        <span>{{selectedA}}</span>
+    </div>
+    <div>
+        班级:
+        <select ng-model="selectB" ng-options="v.id as v.text group by v.grade for v in bData"
+                ng-change="bChange(selectB)">
+            <option value="">--请选择--</option>
+        </select>
+        <span>{{selectedB}}</span>
+    </div>
+</form>
+</body>
+<script type="text/javascript">
+    angular.module('myApp', []).controller('myController', ['$scope', function ($scope) {
+        $scope.aData = [
+            {id: '1001', text: '小学'},
+            {id: '1002', text: '初中'},
+            {id: '1003', text: '高中'}
+        ];
+        $scope.bData = [
+            {id: '1001', text: 'first class', grade: 'one grade'},
+            {id: '1002', text: 'second class', grade: 'one grade'},
+            {id: '2001', text: 'first class', grade: 'second grade'},
+            {id: '2001', text: 'second class', grade: 'second grade'},
+            {id: '3001', text: 'first class', grade: 'third grade'},
+            {id: '3002', text: 'second class', grade: 'third grade'},
+        ];
+        $scope.selectA = "";
+        $scope.selectB = "";
+        $scope.aChange = function (selectA) {
+            $scope.selectedA = selectA;
+        };
+        $scope.bChange = function (selectB) {
+            $scope.selectedB = selectB;
+        };
+    }]);
+</script>
+</html>
