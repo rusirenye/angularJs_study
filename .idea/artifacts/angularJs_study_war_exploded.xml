@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-war" name="angularJs_study:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/angularJs_study_war_exploded</output-path>
-    <root id="root">
-      <element id="javaee-facet-resources" facet="angularJs_study/web/Web2" />
-      <element id="javaee-facet-resources" facet="angularJs_study/web/Web" />
-    </root>
-  </artifact>
-</component>
