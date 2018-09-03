@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../common/angular-1.7.3/angular.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        ul {
+            list-style-type: none;
+            width: 408px;
+            margin: 8px 0px;
+            padding: 0px;
+        }
+
+        ul li {
+            float: left;
+            padding: 5px 0px;
+        }
+
+        ul .even {
+            color: #0026ff;
+        }
+
+        ul .odd {
+            color: #FF0000;
+        }
+
+        ul .bold {
+            font-weight: bold;
+        }
+
+        ul li span {
+            width: 52px;
+            float: left;
+            padding: 0px 10px;
+        }
+
+        ul .focus {
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<div>
+    <div>
+        <input type="text" ng-model="keyWord" placeholder="请输入姓名"/>
+    </div>
+    <ul>
+        <li ng-class="{{bold}}">
+            <span>numb</span>
+            <span ng-click="title='name';desc=!desc;">name</span>
+            <span ng-click="title='sex';desc=!desc;">sex</span>
+            <span ng-click="title='age';desc=!desc;">age</span>
+            <span ng-click="title='score';desc=!desc;">score</span>
+        </li>
+        <li ng-repeat="stu in data | orderBy:title:desc | filter:{name:keyWord}" ng-class-odd="'odd'"
+            ng-class-even="'even'">
+            <span>{{$index+1}}</span>
+            <span>{{stu.name}}</span>
+            <span>{{stu.sex}}</span>
+            <span>{{stu.age}}</span>
+            <span>{{stu.score}}</span>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    var _module = angular.module('myApp', []);
+    _module.controller('myController', ['$scope', function ($scope) {
+        $scope.bold = 'bold';
+        $scope.data = [
+            {name: 'du', sex: 'male', age: 12, score: 99},
+            {name: 'zhang', sex: 'male', age: 12, score: 89},
+            {name: 'wang', sex: 'female', age: 2, score: 39},
+            {name: 'li', sex: 'male', age: 12, score: 81},
+            {name: 'zhao', sex: 'male', age: 12, score: 93},
+            {name: 'liu', sex: 'male', age: 12, score: 90}
+        ];
+
+    }]);
+</script>
+</html>
