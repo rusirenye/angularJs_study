@@ -382,23 +382,23 @@ $(document).ready(function () {
                 {
                     type: 'bar',
                     itemStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(
-                                0, 0, 0, 1,
-                                [
-                                    {offset: 0, color: '#83bff6'},
-                                    {offset: 0.5, color: '#188df0'},
-                                    {offset: 1, color: '#188df0'}
-                                ]
-                            )
-                        },
                         emphasis: {
                             color: new echarts.graphic.LinearGradient(
                                 0, 0, 0, 1,
                                 [
-                                    {offset: 0, color: '#2378f7'},
-                                    {offset: 0.7, color: '#2378f7'},
-                                    {offset: 1, color: '#83bff6'}
+                                    {offset: 0, color: '#93adf7'},
+                                    {offset: 0.5, color: '#2378f7'},
+                                    {offset: 1, color: '#0716f6'}
+                                ]
+                            )
+                        },
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 1, color: '#93adf7'},
+                                    {offset: 0.5, color: '#2378f7'},
+                                    {offset: 0, color: '#0716f6'}
                                 ]
                             )
                         }
@@ -413,5 +413,111 @@ $(document).ready(function () {
         var ep4 = echarts.init($('#p4').get(0));
         ep4.setOption(option);
     }
+
     p4Init();
+
+    function p5Init() {
+
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+            },
+            calculable: true,
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: ['10%', '30%'],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                position: 'center',
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        }
+                    },
+                    data: [
+                        {value: 335, name: '直接访问'},
+                        {value: 310, name: '邮件营销'},
+                        {value: 234, name: '联盟广告'},
+                        {value: 135, name: '视频广告'},
+                        {value: 1548, name: '搜索引擎'}
+                    ]
+                }
+            ]
+        };
+
+        var eInstance = echarts.init($('#p5').get(0));
+        eInstance.setOption(option);
+
+    }
+
+    p5Init();
+
+    function p6Init() {
+        var option = {
+            title: {
+                text: '罗纳尔多 vs 舍普琴科',
+            },
+            legend: {
+                x: 'center',
+                data: ['罗纳尔多' ]
+            },
+            calculable: true,
+            polar: [
+                {
+                    indicator: [
+                        {text: '进攻', max: 100},
+                        {text: '防守', max: 100},
+                        {text: '体能', max: 100},
+                        {text: '速度', max: 100},
+                        {text: '力量', max: 100},
+                        {text: '技巧', max: 100}
+                    ],
+                    radius: 80
+                }
+            ],
+            series: [
+                {
+                    name: '完全实况球员数据',
+                    type: 'radar',
+                    itemStyle: {
+                        normal: {
+                            areaStyle: {
+                                type: 'default'
+                            }
+                        }
+                    },
+                    data: [
+                        {
+                            value: [97, 42, 88, 94, 90, 86],
+                            name: '舍普琴科'
+                        }
+                    ]
+                }
+            ]
+        };
+        var eInstance = echarts.init($('#p6').get(0));
+        eInstance.setOption(option);
+
+    }
+    p6Init();
 });
