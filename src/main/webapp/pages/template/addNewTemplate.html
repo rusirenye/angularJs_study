@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../../common/KendoUI/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="../../common/KendoUI/styles/kendo.material.min.css" />
+    <script type="text/javascript" src="../../common/jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../common/KendoUI/js/kendo.all.min.js"></script>
+
+
+</head>
+<body>
+<div id="example">
+    <div id="grid"></div>
+
+    <script>
+        $(document).ready(function () {
+            var crudServiceBaseUrl = "http://localhost:8088",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products",
+                            type:"post",
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type:"post",
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type:"post",
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type:"post",
+                        },
+                        parameterMap: function(options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return {models: kendo.stringify(options.models)};
+                            }
+                        }
+                    },
+                    batch: true,
+                    pageSize: 20,
+                    schema: {
+                        model: {
+                            id: "ProductID",
+                            fields: {
+                                ProductID: { editable: false, nullable: true },
+                                ProductName: { validation: { required: true } },
+                                UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                                Discontinued: {},
+                                UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                            }
+                        }
+                    }
+                });
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                pageable: true,
+                height: 550,
+                toolbar: ["create"],
+                columns: [
+                    { field:"ProductName", title: "Product Name" },
+                    { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "120px" },
+                    { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+                    { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                    { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
+                editable: "popup"
+            });
+        });
+
+        function customBoolEditor(container, options) {
+            var guid = kendo.guid();
+            $('<input id="' + guid + '" dataBound="Discontinued" data-role="upload" type="file" name="files" data-async="{"saveUrl":"http://rces-web/rcesonly/oandt/OandtWebService.asmx/UploadFile", "autoUpload":"true"}" />').appendTo(container);
+            $('<label class="k-label" for="' + guid + '">​</label>').appendTo(container);
+        }
+    </script>
+</div>
+
+
+</body>
+</html>
